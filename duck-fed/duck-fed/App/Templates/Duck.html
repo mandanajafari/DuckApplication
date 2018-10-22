@@ -1,0 +1,123 @@
+﻿<div ng-init="GetAllItems()" class="divList">
+    <div class="row " style="margin-top:12px">
+        <b>Search:</b>  <input ng-model="search" style="width:90%;border-radius:4px" placeholder="Search duck" />
+        <a href="#" data-toggle="modal" data-load-url="" data-target="#reportLocationModal" class="btn btn-info">Report By Location</a>
+        <a href="#" data-toggle="modal" data-load-url="" data-target="#reportTimeModal" class="btn btn-info">Report By Time</a>
+   
+        <div class="modal fade" tabindex="-1" aria-labelledby="gridSystemModalLabel" id="reportLocationModal" role="dialog">
+            <div class="modal-dialog" style="text-align: left;">
+                <div class="modal-content" id="report">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Report By Location</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table ">
+                            <tbody>
+                                <tr ng-repeat="duck in ducks| filter:{DuckNum : duck.Time}">
+                                    <td>
+                                        <div style="background-color:#7fd2ff;border-radius:4px;text-align:center;color:white"><b>{{duck.Location}}</b></div>
+                                        <p>Duck Number: {{duck.DuckNum}}</p>
+                                        <p>Food: {{duck.FoodName}}</p>
+                                        <p>Time: {{duck.Time |date:'yyyy'}}</p>
+                                        <p>Amount: {{duck.FoodName}}</p>
+                                    </td>             
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="well">
+                            <p>Number of all ducks are fed: {{allDucks}}</p>
+                            <ul ng-repeat="duck in ducks">
+                                <li>
+                                    Number of Ducks are fed at {{duck.Location}} are :<span ng-bind="getDuckByLocation(duck.Location)">{{ducksByLocation}}</span>-->
+                                </li>   
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" onclick="print('report')">Print</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" aria-labelledby="gridSystemModalLabel" id="reportTimeModal" role="dialog">
+            <div class="modal-dialog" style="text-align: left;">
+                <div class="modal-content" id="report">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Report By Time</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table ">
+                            <tbody>
+                                <tr ng-repeat="duck in ducks| filter:{DuckNum : duck.Time}">
+                                    <td>
+                                        <div style="background-color:#7fd2ff;border-radius:4px;text-align:center;color:white"><b>{{duck.Time}}</b></div>
+                                        <p >{{duck.DuckNum}}</p>
+                                        <p>Food {{duck.FoodName}}</p>
+                                        <p>Amount {{duck.Amount}}</p>
+                                        <p>Location {{duck.Location}}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="well">
+                            <p>Number of all ducks are fed: {{allDucks}}</p>
+                            <ul ng-repeat="duck in ducks">
+                                <li>
+                                    Number of Ducks are fed at {{duck.Time}} are :<span ng-bind="getDuckByTime(duck.Time)">{{ducksBytime}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" onclick="print('report')">Print</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row ">
+        <div class="col-xs-12 well panel panel-default">
+            <div class="panel-heading text-center"><b>List of Ducks</b></div>
+            <div class="panel-body">
+                <table class="table table-responsive table-striped ">
+                    <thead>
+                        <tr>
+                            <td>Food Name</td>
+                            <td>Time </td>
+                            <td>Location</td>
+                            <td>Type</td>
+                            <td>Duck Numbers</td>
+                            <td>Amount</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="duck in ducks | filter:search">
+                            <td> {{duck.FoodName}} </td>
+                            <td> {{duck.Time|date: "MM dd, yyyy"}} </td>
+                            <td> {{duck.Location}} </td>
+                            <td> {{duck.FoodType}} </td>
+                            <td> {{duck.DuckNum}} </td>
+                            <td> {{duck.Amount}} </td>
+                            <td>
+                                <a href="#/editDuck/{{duck.Id}}" type="button" class="btn btn-warning "><span class="glyphicon glyphicon-edit"></span></a>
+                                <a href="" type="button" class="btn btn-danger" ng-click="DeleteDuck(duck.Id)"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a href="#" type="button" class="btn btn-info" ng-click="callEveryDay($index)"><span class="glyphicon glyphicon-time"></span></a>
+                            </td>
+                        </tr>
+                        <tr ng-if="!ducks|| ducks.length==0">
+                            <td colspan="6">
+                                No duck to display
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
