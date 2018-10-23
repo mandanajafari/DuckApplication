@@ -14,7 +14,7 @@
                     <div class="modal-body">
                         <table class="table ">
                             <tbody>
-                                <tr ng-repeat="duck in ducks| filter:{DuckNum : duck.Time}">
+                                <tr ng-repeat="duck in ducks| filter:{DuckNum : duck.Location}">
                                     <td>
                                         <div style="background-color:#7fd2ff;border-radius:4px;text-align:center;color:white"><b>{{duck.Location}}</b></div>
                                         <p>Duck Number: {{duck.DuckNum}}</p>
@@ -29,7 +29,7 @@
                             <p>Number of all ducks are fed: {{allDucks}}</p>
                             <ul ng-repeat="duck in ducks">
                                 <li>
-                                    Number of Ducks are fed at {{duck.Location}} are :<span ng-bind="getDuckByLocation(duck.Location)">{{ducksByLocation}}</span>-->
+                                    Number of Ducks are fed at {{duck.Location}} are :<span ng-bind="getDuckByLocation(duck.Location)">{{ducksByLocation}}</span>
                                 </li>   
                             </ul>
                         </div>
