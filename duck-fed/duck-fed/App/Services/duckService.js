@@ -43,18 +43,18 @@
             
             $http.get("/Duck/GetTypes").then(function (result) {
                 deferred.resolve(result.data);
-                console.log(result.data)
+                
             }, function () {
                 deferred.reject();
             });
             return deferred.promise;
         }
-        service.getDuckByLocation = function () {
+        service.getDuckByLocation = function (location) {
             var deferred = $q.defer();
 
-            $http.get("/Duck/GetDuckByLocation").then(function (result) {
+            $http.get("/Duck/GetDuckByLocation/"+ location).then(function (result) {
                 deferred.resolve(result.data);
-                console.log(result.data)
+                
             }, function () {
                 deferred.reject();
             });
@@ -71,10 +71,10 @@
             });
             return deferred.promise;
         }
-        service.getDuckByTime = function () {
+        service.getDuckByTime = function (time) {
             var deferred = $q.defer();
 
-            $http.get("/Duck/GetDuckByTime").then(function (result) {
+            $http.get("/Duck/GetDuckByTime/"+ time).then(function (result) {
                 deferred.resolve(result.data);
                 console.log(result.data)
             }, function () {
