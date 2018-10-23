@@ -37,7 +37,7 @@
         $scope.getDuckByLocation = function (location) {
 
             duckService.getDuckByLocation(location).then(function (result) {
-                console.log(result)
+              
                 $scope.ducksByLocation = result;
             })
         }
@@ -54,7 +54,7 @@
         }
         $scope.callEveryDay = function (index){
             var duck = $scope.ducks[index];
-            var repeatTask = setInterval(duckService.addDuck(duck), 1000*60*60);
+            var repeatTask = setInterval(duckService.addDuck(duck), 1000*60*60*24);
             clearInterval(repeatTask)
         }
       
