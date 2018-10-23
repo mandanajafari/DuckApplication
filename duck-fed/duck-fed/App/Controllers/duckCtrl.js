@@ -52,11 +52,9 @@
                 $scope.ducksBytime = result;
             })
         }
-        $scope.callEveryDay = function (index) {
-        alert(index)
+        $scope.callEveryDay = function (index){
             var duck = $scope.ducks[index];
-            console.log(duck)
-           var repeatTask = setInterval(duckService.addDuck(duck), 1000*60*60);
+            var repeatTask = setInterval(duckService.addDuck(duck), 1000*60*60);
             clearInterval(repeatTask)
         }
       
